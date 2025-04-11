@@ -1,0 +1,125 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock title %}
+
+{% block banner-slider %} {% endblock banner-slider %}
+{% block main-content %}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+    }
+    .header-section {
+        background: linear-gradient(135deg, #ff7eb3, #ff758c);
+        color: white;
+        text-align: center;
+        padding: 60px 20px;
+    }
+    .section-content {
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+    .team-member img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+    .bg-light-blue {
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        color: white;
+        padding: 40px;
+        border-radius: 10px;
+    }
+    .bg-dark-blue {
+        background: linear-gradient(135deg, #303f9f, #1a237e);
+        color: white;
+        padding: 40px;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+
+<!-- Header Section -->
+<div class="header-section">
+<h1>About Melody Mart</h1>
+<p>Your one-stop shop for high-quality musical instruments</p>
+</div>
+
+<!-- Main Container -->
+<div class="container my-5">
+
+<!-- Welcome Section -->
+<div class="row">
+    <div class="col-md-12 section-content">
+        <h2 class="text-center">Welcome to Melody Mart</h2>
+        <p class="text-center">Melody Mart is dedicated to bringing the best musical instruments to musicians of all levels. From guitars and keyboards to drums and violins, we offer top-quality products to help you create beautiful music.</p>
+        <div class="text-center">
+            <img src="{% static 'images/store.jpg' %}" class="img-fluid rounded" alt="Melody Mart Store">
+        </div>
+    </div>
+</div>
+
+<!-- Mission & Vision Section -->
+<div class="row my-4">
+    <div class="col-md-6 bg-light-blue text-center">
+        <h2>Our Mission</h2>
+        <p>To provide musicians with premium quality instruments, expert advice, and an unmatched shopping experience.</p>
+    </div>
+    <div class="col-md-6 bg-dark-blue text-center">
+        <h2>Our Vision</h2>
+        <p>We envision a world where every musician has the tools to create music effortlessly.</p>
+    </div>
+</div>
+
+<!-- Why Choose Us -->
+<div class="row">
+    <div class="col-md-12 section-content">
+        <h2 class="text-center">Why Choose Us?</h2>
+        <ul class="list-group">
+            <li class="list-group-item">Wide range of musical instruments from top brands</li>
+            <li class="list-group-item">Affordable pricing with exciting discounts</li>
+            <li class="list-group-item">Fast and reliable delivery service</li>
+            <li class="list-group-item">Professional advice from experienced musicians</li>
+            <li class="list-group-item">Excellent customer support</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Team Section -->
+<div class="row my-4">
+    <div class="col-md-12 section-content">
+        <h2 class="text-center">Meet Our Team</h2>
+        <div class="row text-center">
+            {% for member in team_members %}
+            <div class="col-md-4">
+                <div class="team-member">
+                    <img src="{% static member.image %}" class="img-fluid" alt="{{ member.name }}">
+                    <h4>{{ member.name }}</h4>
+                    <p>{{ member.role }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<div class="row my-4">
+    <div class="col-md-12 section-content">
+        <h2 class="text-center">Contact Us</h2>
+        <p><strong>Address:</strong> 123 Melody Street, Hyderabad, India</p>
+        <p><strong>Email:</strong> support@melodymart.com</p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+        <p><strong>Follow us:</strong> Facebook | Instagram | Twitter</p>
+    </div>
+</div>
+
+</div>
+
+
+{% endblock main-content %}

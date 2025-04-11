@@ -1,0 +1,175 @@
+{% extends 'nav.html' %}
+{% load static %}
+
+{% block title %} Login-Melody Mart {% endblock title %}
+
+{% block banner-slider %} 
+
+
+
+
+
+<style>
+
+
+.form-control {
+    background: transparent !important;
+    color: white;
+    border: 1px solid white;
+   
+}
+
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+
+.form-control:focus {
+    background: transparent !important;
+    color: white !important;
+    border-color: #ddd;
+    outline: none;
+    box-shadow: none;
+}
+    .image-container {
+        position: relative;
+        width: 100%;
+        height: 100vh; 
+        background: url("{% static 'images/b6.jpg' %}") no-repeat center center/cover;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .form-container {
+        background: rgba(0, 0, 0, 0.7); 
+        padding: 30px;
+        border-radius: 10px;
+        color: white;
+        width: 500px;
+        height: 540px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: -150px;
+    }
+
+    .btn-dark {
+        width: 100%;
+    }
+</style>
+
+<div class="image-container">
+    <div class="form-container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <h3 class="text-center">Sign Up</h3>
+
+            <input type="text" class="form-control mb-3" name="first_name" placeholder="Enter Your Name" required autocomplete="off">
+            <br>
+            
+            <input type="text" class="form-control mb-3" name="username" placeholder="Enter Mobile Number" required autocomplete="off">
+            <br>
+            {% if usermessage %}
+            <p class="text-danger text-center">{{ usermessage }}</p>
+             {% endif %}
+            
+            <input type="email" class="form-control mb-3" name="email" placeholder="Enter Valid Email" required autocomplete="off">
+            <br>
+            {% if emailmessage %}
+            <p class="text-danger text-center">{{ emailmessage }}</p>
+            {% endif %}
+            <input type="password" class="form-control mb-3" name="P1" placeholder="Password" required>
+            <br>
+            <input type="password" class="form-control mb-3" name="P2" placeholder="Confirm Password" required>
+            {% if message %}
+            <p class="text-danger text-center">{{ message }}</p>
+             {% endif %}
+            <input type="submit" value="Signup"  class="btn btn-dark text-dark fw-bold" style="background-color: white;">
+        </form>
+        <br>
+        <h6 class="text-center">Already Have An Account? <a href="{% url 'login' %}" style="text-decoration: none; color: #ff334f;">Login Here</a></h6>
+    </div>
+</div>
+
+
+
+
+        <script>
+
+        function pattern() {
+            var username = document.getElementById('username').value  
+            var email = document.getElementById('email').value    
+            var password = document.getElementById('P1').value
+            var P2assword = document.getElementById('P2').value
+        
+            var userRegex = /^[A-Z]{1}[a-z]*[0-9]{5}$/;
+            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            var passwordRegex = /^(?=.*[A-Z])(?=.*[\W_])(?=.*\d)[A-Za-z\d\W_]{6,}$/;
+        
+            if (username == "" || username == null){
+                document.getElementById('user').innerHTML ="User Name is Required";
+                return false;
+            }
+            else if (!userRegex.test(username)) {
+                document.getElementById('user').innerHTML ="Use Proper Username Ex:- User12345";
+                return false;
+            }   
+            else {
+                document.getElementById('user').innerHTML = "";
+            }
+        
+            if (email == "" || email == null){
+                document.getElementById('mail').innerHTML = "Email is Required";
+                return false;
+            }
+            else if (!emailRegex.test(email)){
+                document.getElementById('mail').innerHTML = "Enter Correct Email Format";
+                return false;
+            }
+            else {
+                document.getElementById('mail').innerHTML = "";
+            }
+        
+            if (password == "" || password == null){
+                document.getElementById('pass').innerHTML = "Password is Required";
+                return false;
+            }
+            else if (!passwordRegex.test(password)){
+                document.getElementById("pass").innerHTML = "Password must contain Uppercase, Special Character, and a Number.";
+                return false;
+            }
+            else {
+                document.getElementById('pass').innerHTML = "";
+            }
+        
+            if (P2assword == "" || P2assword == null){
+                document.getElementById('password').innerHTML = "Confirm Password is Required";
+                return false;
+            }
+            else if (P2assword !== password){
+                document.getElementById('password').innerHTML = "Confirm Password must match Password";
+                return false;
+            }
+            else {
+                document.getElementById('password').innerHTML = "";
+            }
+        
+            return true;
+        }
+        
+
+
+
+   
+</script>
+
+
+
+
+
+{% endblock banner-slider %} 
+
+
+
