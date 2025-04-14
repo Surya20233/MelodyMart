@@ -65,9 +65,14 @@
         <form action="" method="POST">
             {% csrf_token %}
             <h3 class="text-center">Login</h3>
-            <input type="email" class="form-control mb-3" name="email"  placeholder="Enter email " autocomplete="off">
+            <input type="email" class="form-control mb-3" name="email"  placeholder="Enter email " required >
             <br>
-            <input type="password" class="form-control mb-3" name="P1" placeholder="Enter Password">
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" name="P1" placeholder="Enter Password" id="passwordField" required>
+                <span class="input-group-text bg-dark border-white" onclick="togglePasswordVisibility()" style="cursor: pointer;">
+                    <i class="bx bx-show text-white" id="toggleIcon"></i>
+                </span>
+            </div>
             {% if message %}
             <p class="text-danger text-center">{{ message }}</p>
              {% endif %}
@@ -79,6 +84,22 @@
     </div>
 </div>
 
+<script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById('passwordField');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('bx-show');
+            toggleIcon.classList.add('bx-hide');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.remove('bx-hide');
+            toggleIcon.classList.add('bx-show');
+        }
+    }
+</script>
 
 
 

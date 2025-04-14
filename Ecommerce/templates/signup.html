@@ -1,7 +1,7 @@
 {% extends 'nav.html' %}
 {% load static %}
 
-{% block title %} Login-Melody Mart {% endblock title %}
+{% block title %} SignUP {% endblock title %}
 
 {% block banner-slider %} 
 
@@ -66,7 +66,7 @@
             {% csrf_token %}
             <h3 class="text-center">Sign Up</h3>
 
-            <input type="text" class="form-control mb-3" name="first_name" placeholder="Enter Your Name" required autocomplete="off">
+            <input type="text" class="form-control mb-3" name="first_name" placeholder="Enter Your Name" required autocomplete="off" maxlength="25">
             <br>
             
             <input type="text" class="form-control mb-3" name="username" placeholder="Enter Mobile Number" required autocomplete="off">
@@ -80,9 +80,19 @@
             {% if emailmessage %}
             <p class="text-danger text-center">{{ emailmessage }}</p>
             {% endif %}
-            <input type="password" class="form-control mb-3" name="P1" placeholder="Password" required>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" name="password" placeholder="Enter Password" id="signupPassword">
+                <span class="input-group-text bg-dark border-white" onclick="toggleSignupPassword()" style="cursor: pointer;">
+                    <i class="bx bx-show text-white" id="signupToggleIcon"></i>
+                </span>
+            </div>
             <br>
-            <input type="password" class="form-control mb-3" name="P2" placeholder="Confirm Password" required>
+            <div class="input-group mb-3">
+                <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" id="signupConfirmPassword">
+                <span class="input-group-text bg-dark border-white" onclick="toggleConfirmPassword()" style="cursor: pointer;">
+                    <i class="bx bx-show text-white" id="confirmToggleIcon"></i>
+                </span>
+            </div>
             {% if message %}
             <p class="text-danger text-center">{{ message }}</p>
              {% endif %}
@@ -96,75 +106,38 @@
 
 
 
-        <script>
+       
+<script>
+    function toggleSignupPassword() {
+        const passwordInput = document.getElementById('signupPassword');
+        const toggleIcon = document.getElementById('signupToggleIcon');
 
-        function pattern() {
-            var username = document.getElementById('username').value  
-            var email = document.getElementById('email').value    
-            var password = document.getElementById('P1').value
-            var P2assword = document.getElementById('P2').value
-        
-            var userRegex = /^[A-Z]{1}[a-z]*[0-9]{5}$/;
-            var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            var passwordRegex = /^(?=.*[A-Z])(?=.*[\W_])(?=.*\d)[A-Za-z\d\W_]{6,}$/;
-        
-            if (username == "" || username == null){
-                document.getElementById('user').innerHTML ="User Name is Required";
-                return false;
-            }
-            else if (!userRegex.test(username)) {
-                document.getElementById('user').innerHTML ="Use Proper Username Ex:- User12345";
-                return false;
-            }   
-            else {
-                document.getElementById('user').innerHTML = "";
-            }
-        
-            if (email == "" || email == null){
-                document.getElementById('mail').innerHTML = "Email is Required";
-                return false;
-            }
-            else if (!emailRegex.test(email)){
-                document.getElementById('mail').innerHTML = "Enter Correct Email Format";
-                return false;
-            }
-            else {
-                document.getElementById('mail').innerHTML = "";
-            }
-        
-            if (password == "" || password == null){
-                document.getElementById('pass').innerHTML = "Password is Required";
-                return false;
-            }
-            else if (!passwordRegex.test(password)){
-                document.getElementById("pass").innerHTML = "Password must contain Uppercase, Special Character, and a Number.";
-                return false;
-            }
-            else {
-                document.getElementById('pass').innerHTML = "";
-            }
-        
-            if (P2assword == "" || P2assword == null){
-                document.getElementById('password').innerHTML = "Confirm Password is Required";
-                return false;
-            }
-            else if (P2assword !== password){
-                document.getElementById('password').innerHTML = "Confirm Password must match Password";
-                return false;
-            }
-            else {
-                document.getElementById('password').innerHTML = "";
-            }
-        
-            return true;
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('bx-show');
+            toggleIcon.classList.add('bx-hide');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.remove('bx-hide');
+            toggleIcon.classList.add('bx-show');
         }
-        
+    }
 
+    function toggleConfirmPassword() {
+        const passwordInput = document.getElementById('signupConfirmPassword');
+        const toggleIcon = document.getElementById('confirmToggleIcon');
 
-
-   
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.remove('bx-show');
+            toggleIcon.classList.add('bx-hide');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.remove('bx-hide');
+            toggleIcon.classList.add('bx-show');
+        }
+    }
 </script>
-
 
 
 

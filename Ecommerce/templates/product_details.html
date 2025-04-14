@@ -5,16 +5,23 @@
 
 {% block main-content %} 
 
+
+
        <div class="container mt-5">
         <div class="row d-flex  justify-content-center">
         <div class="imag2 col-lg-4 " style="margin-right: 30px;">
                 <img src="{{product.product_image.url}}" class="image shadow col-xs-6 col-sm-12 col-lg-12 mt-3 text-sm-center w-100 h-78" alt="">
         </div>
         <div class="productdetail col-lg-6 ">
-                <h1 >{{ product.title }}</h1> 
-                <h5 class="fw-bold text-danger">Rs.{{ product.discount_price }}/-</h5>
-                <small class="text-decoration-line-through text-muted fs-6"><del>Rs.{{ product.selling_price }}/-</small></del>
-                <br><br><h4>Product Featuers</h4>
+                <h1 style="color: #222831;;">{{ product.title }}</h1>
+                <p class="text-muted">{{ product.brand }}</p>
+                <p style="margin-top: -10px;">
+                  Rs.<span class="fw-bold fs-4 text-success">{{ product.selling_price }}/-</span>
+                  {% if product.discount_price %}
+                  <del class="text-muted ms-2">Rs.{{ product.discount_price }}/-</del>
+                  {% endif %}
+              </p> 
+              <h4>More Information</h4>
                 <ul class="fs-5"  >
                         <div style="font-size: 15px;">
                         <li >{{ product.description }}</li>
@@ -88,7 +95,7 @@
                       <div class="card shadow d-flex flex-column justify-content-between" style="height: 400px;">
                           <img src="{{ product.product_image.url }}" class="card-img-top" alt="{{ product.title }}" style="width:100%; height: 200px;">
                           <div class="card-body text-center">
-                              <h5 class="card-title">{{ product.title }}</h5>
+                              <h5 class="card-title" style="color: #222831;">{{ product.title }}</h5>
                               <h6 class="card-text fw-bold">Rs.{{ product.discount_price }}/-</h6>
                               <small class="fw-light text-danger text-decoration-line-through">Rs.{{ product.selling_price }}/-</small>
                           </div>
@@ -140,6 +147,16 @@
   height: 200px;
   object-fit: contain;
   transition: transform 0.3s ease-in-out;
+}
+
+.image{
+  transition: transform 0.3s ease-in-out;
+
+}
+.image:hover{
+
+  transform: scale(1.05);
+
 }
 
 .product-img:hover {

@@ -13,10 +13,13 @@ from django.contrib.auth.models import User
 
 from app1.forms import CustomerDetailsForm
 
-from app1.models import Coustomer_Details
+from app1.models import Coustomer_Details,Contact
 from django.contrib.auth.decorators import login_required
 
 from django.views import View
+
+from django.contrib import messages
+
 
 from app1.models import Product,Cart,Coustomer_Details,Payment,Wishlist,Order_Placed
 
@@ -136,6 +139,25 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
+
+
+
+def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        # Save to database
+        if name and email and subject and message:
+            Contact.objects.create(name=name, email=email, subject=subject, message=message)
+            messages.success(request, "Your message has been sent successfully!")
+            return redirect('contact')  # Make sure 'contact' is the name of the URL
+        else:
+            messages.error(request, "Please fill all fields correctly.")
+
+    return render(request, 'contact.html')
 
 
 
