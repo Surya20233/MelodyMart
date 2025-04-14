@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-t+c+h-hj8@1a4c8e##pnordkg(pfj$#a15q&b14px=8&zi)@$_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['music-instruments-ecommerce-website-with.onrender.com']
 
 
 # Application definition
