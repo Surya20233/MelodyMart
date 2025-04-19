@@ -21,14 +21,24 @@
         min-height: 53vh;
         
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+.stylish-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #343a40;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
     
     
     
     </style>
     
     <div id="orders" class="ordercontainer py-4">
-        <div class="order-container-custom">
-            <h2 class="text-center mb-4" style="font-family: 'Franklin Gothic Medium'; letter-spacing: 2px;">Your Orders</h2>
+        <div class="order-container-custom mt-5">
+            <h2 class="text-center mb-4 stylish-heading" >Your Orders</h2>
     
             {% if orders %}
                 {% for od in orders %}
@@ -101,8 +111,8 @@
         </div>
     </div>
 
-    <div class="col-md-12" style="margin-left: 47%;">
-        <a class="btn" href="{% url 'ourproducts' %}" 
+    <div class="col-md-12 d-flex justify-content-center" >
+        <a class="btn " href="{% url 'ourproducts' %}" 
         
         style="background-color: white; border: solid 1px black; color: black; transition: 0.3s;"
         onmouseover="this.style.backgroundColor='black'; this.style.color='white';"

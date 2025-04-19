@@ -12,7 +12,7 @@ body {
 
 .carousel-item img {
   height: 600px;
-  width: 90%; /* Adjust height as needed */
+  width: 100%; /* Adjust height as needed */
  /* Ensures the image fits within the box without distortion */
 }
 

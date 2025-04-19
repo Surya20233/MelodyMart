@@ -49,9 +49,19 @@
             height: 180px;
         }
     }
+
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap');
+
+    .stylish-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #343a40;
+      margin-bottom: 30px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
 </style>
 {% if A_Prod %}
-<div class="container mt-5">
+<div class="container" style="margin-top: 8vh;"> 
     <h3 class="text-center mb-4 fw-bold stylish-heading">Explore Our Products</h3>
     
     <div class="row g-4">
