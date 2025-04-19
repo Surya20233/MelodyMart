@@ -80,18 +80,6 @@ STATUS_CHOICES = [
     ('Cancled','Cancled')
 ]
 
-class OrderPlaced(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    customer = models.ForeignKey(Coustomer_Details, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
-    ordered_date = models.DateTimeField(auto_now_add=True)
-    status = models.CharField(max_length=50, choices=STATUS_CHOICES, default='Pending')
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, default=None, null=True, blank=True)
-
-    @property
-    def total_cost(self):
-        return self.quantity * self.product.discount_price+500
     
 
 class Wishlist(models.Model):

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product,Coustomer_Details,Cart,Payment,OrderPlaced,Wishlist,Order_Placed,Contact
+from .models import Product,Coustomer_Details,Cart,Payment,Wishlist,Order_Placed,Contact
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -28,11 +28,11 @@ class PaymentAdmin(admin.ModelAdmin):
     search_fields = ['user__username', 'razorpay_order_id', 'razorpay_payment_id']
     list_filter = ['paid']
 
-@admin.register(OrderPlaced)
-class OrderPlacedAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user', 'customer', 'product', 'quantity', 'ordered_date', 'status', 'payment']
-    list_filter = ['status', 'ordered_date']
-    search_fields = ['user__username', 'product__title', 'customer__name']
+# @admin.register(OrderPlaced)
+# class OrderPlacedAdmin(admin.ModelAdmin):
+#     list_display = ['id', 'user', 'customer', 'product', 'quantity', 'ordered_date', 'status', 'payment']
+#     list_filter = ['status', 'ordered_date']
+#     search_fields = ['user__username', 'product__title', 'customer__name']
 
 @admin.register(Wishlist)
 class WishlistAdmin(admin.ModelAdmin):

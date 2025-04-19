@@ -37,8 +37,8 @@ def Sign_Up(request):
         first_name = request.POST.get('first_name')
         username = request.POST.get('username')
         email = request.POST.get('email')
-        password = request.POST.get('P1')
-        password2 = request.POST.get('P2')
+        password = request.POST.get('password')
+        password2 = request.POST.get('confirm_password')
         if password == password2:
             if User.objects.filter(username=username).exists():
                 usermessage = "Mobile Number already exists"

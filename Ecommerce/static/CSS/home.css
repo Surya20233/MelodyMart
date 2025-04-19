@@ -7,11 +7,11 @@
 }
 
 body {
-    padding-top: 110px; 
+    padding-top: 130px; 
 }
 
 .carousel-item img {
-  height: 590px;
+  height: 600px;
   width: 90%; /* Adjust height as needed */
  /* Ensures the image fits within the box without distortion */
 }
