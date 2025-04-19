@@ -6,6 +6,7 @@ class ProductAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'brand', 'selling_price', 'discount_price','category', 'product_image')
     search_fields = ('title', 'brand', 'category')
     list_filter = ('category', 'brand')
+    list_editable = ["product_image"]
 
 
 
