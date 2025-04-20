@@ -8,7 +8,7 @@ from datetime import timedelta
 CATEGORY_CHOICES = (
     ('PIANO','Piano'),
     ('E_GUITER','E_Guiter'),
-    ('A_Guiter','A_Guiter'),
+    ('A_GUITER','A_Guiter'),
     ('KEY_BOARD','Key_Board'),
     ('FLUTE','FLUTE'),
     ('VIOLIN','Violin'),
