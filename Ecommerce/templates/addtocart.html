@@ -35,7 +35,9 @@
                         {% for item in cart %}
                         <div class="row mb-4 cart-product mt-4" data-prod-id="{{ item.product.id }}">
                             <div class="col-sm-3 text-center align-self-center">
+                                <a href="{% url 'product_details' item.product.id %}">
                                 <img src="{{ item.product.product_image.url }}" class="img-fluid img-thumbnail shadow-sm" height="150" width="150">
+                            </a>
                             </div>
 
                             <div class="col-sm-9">
@@ -135,39 +137,48 @@ function formatCurrency(value) {
 $(document).ready(function () {
     // Increase quantity
     $(document).on('click', '.plus-cart', function () {
-        var id = $(this).attr("pid");
-        var $productRow = $(`[data-prod-id="${id}"]`);
-        var $qty = $productRow.find('.quantity');
+    var id = $(this).attr("pid");
+    var $productRow = $(`[data-prod-id="${id}"]`);
+    var $qty = $productRow.find('.quantity');
 
-        $.ajax({
-            type: "GET",
-            url: "/pluscart",
-            data: { prod_id: id },
-            success: function (data) {
+    $.ajax({
+        type: "GET",
+        url: "/pluscart",
+        data: { prod_id: id },
+        success: function (data) {
+            if (data.error) {
+                alert(data.error);  // Show the alert if quantity exceeds limit
+            } else {
                 $qty.text(data.quantity);
                 $('#amount').text(formatCurrency(data.amount));
                 $('#totalamount').text(formatCurrency(data.totalamount));
             }
-        });
+        }
     });
+});
 
     // Decrease quantity
     $(document).on('click', '.minus-cart', function () {
-        var id = $(this).attr("pid");
-        var $productRow = $(`[data-prod-id="${id}"]`);
-        var $qty = $productRow.find('.quantity');
+    var id = $(this).attr("pid");
+    var $productRow = $(`[data-prod-id="${id}"]`);
+    var $qty = $productRow.find('.quantity');
 
-        $.ajax({
-            type: "GET",
-            url: "/minuscart",
-            data: { prod_id: id },
-            success: function (data) {
+    $.ajax({
+        type: "GET",
+        url: "/minuscart",
+        data: { prod_id: id },
+        success: function (data) {
+            if (data.error) {
+                alert(data.error);  // Show alert if quantity is already at minimum
+            } else {
                 $qty.text(data.quantity);
                 $('#amount').text(formatCurrency(data.amount));
                 $('#totalamount').text(formatCurrency(data.totalamount));
             }
-        });
+        }
     });
+});
+
 
     // Remove item
     $(document).on('click', '.remove-cart', function () {

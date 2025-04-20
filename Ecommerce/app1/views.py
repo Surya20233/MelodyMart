@@ -281,6 +281,7 @@ class Product_Details(View):
         product = Product.objects.get(id=pk)
         category_products = Product.objects.filter(category=product.category).exclude(id=pk)
         All_Products =  Product.objects.order_by('?')
+        in_cart = Cart.objects.filter(user=request.user, product=product).exists()
  
     
     
@@ -304,7 +305,8 @@ class Product_Details(View):
             'totalwish': totalwish,
             'wishlist': wishlist,
             'cart': cart,
-            'A_Prod':All_Products
+            'A_Prod':All_Products,
+            'in_cart': in_cart
         }
 
         return render(request, 'product_details.html', context)
@@ -461,42 +463,53 @@ def show_Cart(request):
 def plus_cart(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
-        c= Cart.objects.get(Q(product = prod_id) & Q(user = request.user))
-        c.quantity +=1
-        c.save()
-        user = request.user
-        cart = Cart.objects.filter(user=user)
-        amount = 0
-        for p  in cart:
-            value = p.quantity * p.product.discount_price
-            amount = amount + value
-        totalamount = amount + 500
-        data = {
-            'quantity':c.quantity,
-            'amount':amount,
-            'totalamount':totalamount
-        }
-        return JsonResponse(data)
+        try:
+            c = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
+
+            if c.quantity >= 2:
+                return JsonResponse({'error': 'Maximum quantity limit reached'})
+
+            c.quantity += 1
+            c.save()
+
+            cart = Cart.objects.filter(user=request.user)
+            amount = sum(item.quantity * item.product.discount_price for item in cart)
+            totalamount = amount + 500
+
+            return JsonResponse({
+                'quantity': c.quantity,
+                'amount': amount,
+                'totalamount': totalamount
+            })
+
+        except Cart.DoesNotExist:
+            return JsonResponse({'error': 'Cart item not found.'})
+
 @login_required(login_url='login')      
 def minus_cart(request):
     if request.method == 'GET':
         prod_id = request.GET['prod_id']
-        c= Cart.objects.get(Q(product = prod_id) & Q(user = request.user))
-        c.quantity -=1
-        c.save()
-        user = request.user
-        cart = Cart.objects.filter(user=user)
-        amount = 0
-        for p  in cart:
-            value = p.quantity * p.product.discount_price
-            amount = amount + value
-        totalamount = amount + 500
-        data = {
-            'quantity':c.quantity,
-            'amount':amount,
-            'totalamount':totalamount
-        }
-        return JsonResponse(data)
+        try:
+            c = Cart.objects.get(Q(product=prod_id) & Q(user=request.user))
+
+            if c.quantity <= 1:
+                return JsonResponse({'error': 'Minimum quantity is 1'})
+
+            c.quantity -= 1
+            c.save()
+
+            cart = Cart.objects.filter(user=request.user)
+            amount = sum(item.quantity * item.product.discount_price for item in cart)
+            totalamount = amount + 500
+
+            return JsonResponse({
+                'quantity': c.quantity,
+                'amount': amount,
+                'totalamount': totalamount
+            })
+
+        except Cart.DoesNotExist:
+            return JsonResponse({'error': 'Cart item not found.'})
     
 @login_required(login_url='login')  
 def remove_cart(request):
