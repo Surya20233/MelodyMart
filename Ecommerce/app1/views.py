@@ -281,7 +281,12 @@ class Product_Details(View):
         product = Product.objects.get(id=pk)
         category_products = Product.objects.filter(category=product.category).exclude(id=pk)
         All_Products =  Product.objects.order_by('?')
-        in_cart = Cart.objects.filter(user=request.user, product=product).exists()
+        # Default to False
+        in_cart = False
+
+        # Only check cart if user is logged in
+        if request.user.is_authenticated:
+            in_cart = Cart.objects.filter(user=request.user, product=product).exists()
  
     
     
