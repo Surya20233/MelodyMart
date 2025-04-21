@@ -16,9 +16,9 @@
                 <h1 style="color: #222831;;">{{ product.title }}</h1>
                 <p class="text-muted">{{ product.brand }}</p>
                 <p style="margin-top: -10px;">
-                  Rs.<span class="fw-bold fs-4 text-success">{{ product.selling_price }}/-</span>
+                  Rs.<span class="fw-bold fs-4 text-success">{{ product.discount_price }}/-</span>
                   {% if product.discount_price %}
-                  <del class="text-muted ms-2">Rs.{{ product.discount_price }}/-</del>
+                  <del class="text-muted ms-2">Rs.{{ product.selling_price }}/-</del>
                   {% endif %}
               </p> 
               <h4>More Information</h4>
